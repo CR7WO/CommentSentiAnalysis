@@ -17,7 +17,7 @@ def prepareData(sourceFile, targetFile):
     line = f.readline()
     while line:
         print('---processing ', lineNum, ' article---')
-        # line = clearTxt(line)
+        line = clearTxt(line)
         seg_line = sent2word(line)
         target.writelines(seg_line + '\n')
         lineNum = lineNum + 1
@@ -31,18 +31,13 @@ def prepareData(sourceFile, targetFile):
 def clearTxt(line):
     if line != '':
         line = line.strip()
-        intab = ""
-        outtab = ""
-        trantab = str.maketrans(intab, outtab)
-        pun_num = string.punctuation + string.digits
-        line = line.encode('utf-8')
-        print(type(trantab))
-        line = line.translate(trantab, pun_num)
-        line = line.decode("utf8")
+        print (line)
         # 去除文本中的英文和数字
         line = re.sub("[a-zA-Z0-9]", "", line)
         # 去除文本中的中文符号和英文符号
-        line = re.sub("[\s+\.\!\/_,$%^*(+\"\'；：“”．]+|[+——！，。？?、~@#￥%……&*（）]+".decode("utf8"), "", line)
+        line = re.sub("[\s+\.\!\/_,$%^*(+\"\'；：“”．]+|[+——！，。？?、~@#￥%……&*（）]+", "", line)
+        print("此时的line:")
+        print(line)
     return line
 
 
